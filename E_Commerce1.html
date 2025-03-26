@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MyShop - E-commerce</title>
+  <style>
+    /* CSS Styles */
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: lightblue;
+      color: #333;
+    }
+
+    header {
+      background-color: #2c3e50;
+      color: black;
+      padding: 1rem;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    nav .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: brown;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li a {
+      color: black;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #ff6f61;
+    }
+
+    .search-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .search-bar input {
+      padding: 0.5rem;
+      border: 1px solid black;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    .search-bar button {
+      background-color: brown;
+      color: black;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background-color 0.3s;
+    }
+
+    .search-bar button:hover {
+      background-color: #e65a50;
+    }
+
+    .language-selector {
+      margin-left: auto;
+    }
+
+    .language-selector select {
+      padding: 0.5rem;
+      border: 1px solid black;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    .hero {
+      background: url('https://via.placeholder.com/1200x400/2c3e50/ffffff?text=Welcome+to+MyShop') no-repeat center center/cover;
+      color: #fff;
+      text-align: center;
+      padding: 5rem 1rem;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin: 0;
+    }
+
+    .hero p {
+      font-size: 1.5rem;
+      margin: 1rem 0;
+    }
+
+    .hero .btn {
+      background-color: brown;
+      color: black;
+      border: none;
+      padding: 0.8rem 2rem;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .hero .btn:hover {
+      background-color: #e65a50;
+    }
+
+    .featured-products, .cart-page, .checkout-page, .help-page, .contact-page {
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .featured-products h2, .cart-page h2, .checkout-page h2, .help-page h2, .contact-page h2 {
+      font-size: 2rem;
+      color: #2c3e50;
+    }
+
+    .product-list, .cart-items {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    .product-card, .cart-item {
+      background-color: lightblue;
+      border: 1px solid black;
+      border-radius: 10px;
+      padding: 1.5rem;
+      width: 250px;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .product-card:hover, .cart-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-card img, .cart-item img {
+      max-width: 100%;
+      height: 150px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    .product-card h3, .cart-item h3 {
+      margin: 1rem 0 0.5rem;
+      font-size: 1.4rem;
+      color: #2c3e50;
+    }
+
+    .product-card p, .cart-item p {
+      color: #666;
+      font-size: 1rem;
+      margin: 0.5rem 0;
+    }
+
+    .product-card .price, .cart-item .price {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: brown;
+    }
+
+    .product-card button, .cart-item button {
+      background-color: #ff6f61;
+      color: black;
+      border: none;
+      padding: 0.7rem 1.5rem;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background-color 0.3s;
+    }
+
+    .product-card button:hover, .cart-item button:hover {
+      background-color: #e65a50;
+    }
+
+    .checkout-page, .help-page, .contact-page {
+      text-align: left;
+    }
+
+    .checkout-page ul, .help-page ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .checkout-page ul li, .help-page ul li {
+      margin: 1rem 0;
+      font-size: 1rem;
+      color: #666;
+    }
+
+    .checkout-page button, .help-page button, .contact-page button {
+      background-color: #2c3e50;
+      color: black;
+      border: none;
+      padding: 0.7rem 1.5rem;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      margin: 0.5rem;
+      transition: background-color 0.3s;
+    }
+
+    .checkout-page button:hover, .help-page button:hover, .contact-page button:hover {
+      background-color: #1a252f;
+    }
+
+    footer {
+      background-color: #2c3e50;
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .no-results {
+      font-size: 1.2rem;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <nav>
+      <div class="logo">MyShop</div>
+      <ul>
+        <li><a href="#" id="home-link">Home</a></li>
+        <li><a href="#" id="products-link">Products</a></li>
+        <li><a href="#" id="cart-link">Cart (<span id="cart-count">0</span>)</a></li>
+        <li><a href="#" id="help-link">Help</a></li>
+        <li><a href="#" id="contact-link">Contact</a></li>
+      </ul>
+      <div class="search-bar">
+        <input type="text" id="search-input" placeholder="Search products...">
+        <button onclick="searchProducts()">Search</button>
+      </div>
+      <div class="language-selector">
+        <select id="language-select">
+          <option value="en">English</option>
+          <option value="es">Spanish</option>
+          <option value="fr">French</option>
+          <option value="de">German</option>
+          <option value="hi">Hindi</option>
+          <option value="or">Odia</option>
+          <option value="bn">Bengali</option>
+          <option value="rj">Rajasthani</option>
+        </select>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home-page">
+    <h1 id="hero-title">Welcome to Items</h1>
+    <p id="hero-description">Your one-stop shop for amazing products.</p>
+    <button class="btn" id="shop-now-btn">Shop Now</button>
+  </section>
+
+  <!-- Featured Products -->
+  <section class="featured-products hidden" id="products-page">
+    <h2 id="featured-products-title">Featured Products</h2>
+    <div class="product-list" id="product-list">
+      <!-- Products will be dynamically added here -->
+    </div>
+    <p class="no-results hidden" id="no-results">No products found.</p>
+  </section>
+
+  <!-- Cart Page -->
+  <section class="cart-page hidden" id="cart-page">
+    <h2 id="cart-title">Your Cart</h2>
+    <div class="cart-items" id="cart-items">
+      <!-- Cart items will be dynamically added here -->
+    </div>
+    <p>Total: ₹<span id="cart-total">0</span></p>
+    <button id="checkout-btn">Proceed to Checkout</button>
+  </section>
+
+  <!-- Checkout Page -->
+  <section class="checkout-page hidden" id="checkout-page">
+    <h2 id="checkout-title">Checkout</h2>
+    <ul id="checkout-items">
+      <!-- Checkout items will be dynamically added here -->
+    </ul>
+    <p>Total: ₹<span id="checkout-total">0</span></p>
+    <button id="confirm-payment">Confirm Payment</button>
+  </section>
+
+  <!-- Help Page -->
+  <section class="help-page hidden" id="help-page">
+    <h2 id="help-title">Help</h2>
+    <ul>
+      <li><strong>Step 1:</strong> <span id="help-step1">Browse products and add them to your cart.</span></li>
+      <li><strong>Step 2:</strong> <span id="help-step2">Go to the cart and review your items.</span></li>
+      <li><strong>Step 3:</strong> <span id="help-step3">Proceed to checkout and confirm your payment.</span></li>
+      <li><strong>Step 4:</strong> <span id="help-step4">Receive your order confirmation and track your shipment.</span></li>
+      <li><strong>Step 5:</strong> <span id="help-step5">After receiving at you door then ask the OTP number from the delivery guy.</span></li>
+      <li><strong>Step 6:</strong> <span id="help-step6">If it verified then accept the order and do the payment.</span></li>
+    </ul>
+  </section>
+
+  <!-- Contact Page -->
+  <section class="contact-page hidden" id="contact-page">
+    <h2 id="contact-title">Contact Us</h2>
+    <p id="contact-description">For further assistance, please contact us:</p>
+    <p><strong>Helpline:</strong> 235-453-7891</p>
+    <p><strong>Email:</strong> rahulcox@gmail.com</p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2023 MyShop. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // JavaScript Functionality
+    document.addEventListener('DOMContentLoaded', () => {
+      const products = [
+        {
+          id: 1,
+          name: 'Wireless Headphones',
+          price: 1999,
+          image: 'https://via.placeholder.com/150',
+          description: 'High-quality wireless headphones with noise cancellation.',
+        },
+        {
+          id: 2,
+          name: 'Smart Watch',
+          price: 4999,
+          image: 'https://via.placeholder.com/150',
+          description: 'Fitness tracker with heart rate monitor and GPS.',
+        },
+        {
+          id: 3,
+          name: 'Bluetooth Speaker',
+          price: 2999,
+          image: 'https://via.placeholder.com/150',
+          description: 'Portable Bluetooth speaker with 20-hour battery life.',
+        },
+        {
+          id: 4,
+          name: 'Black Leather Shoes',
+          price: 4000,
+          image: 'https://via.placeholder.com/150',
+          description: 'Portable Bluetooth speaker with 20-hour battery life.',
+        },
+        {
+          id: 5,
+          name: 'Laptop',
+          price: 350000,
+          image: 'https://via.placeholder.com/150',
+          description: 'Portable Bluetooth speaker with 20-hour battery life.',
+        },
+        {
+          id: 6,
+          name: 'Vegetables',
+          price: 46,
+          image: 'https://via.placeholder.com/150',
+          description: 'Portable Bluetooth speaker with 20-hour battery life.',
+        },
+        {
+          id: 7,
+          name: 'Beverage Items',
+          price: 250,
+          image: 'https://via.placeholder.com/150',
+          description: 'Portable Bluetooth speaker with 20-hour battery life.',
+        },
+        {
+          id: 8,
+          name: 'Toothpaste',
+          price: 80,
+          image: 'https://via.placeholder.com/150',
+          description: 'Portable Bluetooth speaker with 20-hour battery life.',
+        },
+        {
+          id: 9,
+          name: 'Vanity Bags',
+          price: 530,
+          image: 'https://via.placeholder.com/150',
+          description: 'Portable Bluetooth speaker with 20-hour battery life.',
+        },
+        {
+          id: 10,
+          name: 'Tissues and toilet paper',
+          price: 70,
+          image: 'https://via.placeholder.com/150',
+          description: 'Portable Bluetooth speaker with 20-hour battery life.',
+        },
+        {
+          id: 11,
+          name: 'Sofa Set',
+          price: 1500,
+          image: 'https://via.placeholder.com/150',
+          description: 'Portable Bluetooth speaker with 20-hour battery life.',
+        },
+      ];
+
+      const cart = [];
+      const homePage = document.getElementById('home-page');
+      const productsPage = document.getElementById('products-page');
+      const cartPage = document.getElementById('cart-page');
+      const checkoutPage = document.getElementById('checkout-page');
+      const helpPage = document.getElementById('help-page');
+      const contactPage = document.getElementById('contact-page');
+      const productList = document.getElementById('product-list');
+      const cartItems = document.getElementById('cart-items');
+      const checkoutItems = document.getElementById('checkout-items');
+      const cartCount = document.getElementById('cart-count');
+      const cartTotal = document.getElementById('cart-total');
+      const checkoutTotal = document.getElementById('checkout-total');
+      const homeLink = document.getElementById('home-link');
+      const productsLink = document.getElementById('products-link');
+      const cartLink = document.getElementById('cart-link');
+      const helpLink = document.getElementById('help-link');
+      const contactLink = document.getElementById('contact-link');
+      const shopNowBtn = document.getElementById('shop-now-btn');
+      const checkoutBtn = document.getElementById('checkout-btn');
+      const confirmPaymentBtn = document.getElementById('confirm-payment');
+      const searchInput = document.getElementById('search-input');
+      const languageSelect = document.getElementById('language-select');
+      const noResults = document.getElementById('no-results');
+
+      // Translations
+      const translations = {
+        en: {
+          heroTitle: 'Welcome to MyShop',
+          heroDescription: 'Your one-stop shop for amazing products.',
+          featuredProductsTitle: 'Featured Products',
+          cartTitle: 'Your Cart',
+          checkoutTitle: 'Checkout',
+          helpTitle: 'Help',
+          contactTitle: 'Contact Us',
+          contactDescription: 'For further assistance, please contact us:',
+          helpStep1: 'Browse products and add them to your cart.',
+          helpStep2: 'Go to the cart and review your items.',
+          helpStep3: 'Proceed to checkout and confirm your payment.',
+          helpStep4: 'Receive your order confirmation and track your shipment.',
+          helpStep5: 'After receiving at you door then ask the OTP number from the delivery guy.',
+          helpStep6: 'If it verified then accept the order and do the payment.',
+          noResults: 'No products found.',
+        },
+        es: {
+          heroTitle: 'Bienvenido a MyShop',
+          heroDescription: 'Tu tienda única para productos increíbles.',
+          featuredProductsTitle: 'Productos Destacados',
+          cartTitle: 'Tu Carrito',
+          checkoutTitle: 'Pagar',
+          helpTitle: 'Ayuda',
+          contactTitle: 'Contáctenos',
+          contactDescription: 'Para mayor asistencia, por favor contáctenos:',
+          helpStep1: 'Navega por los productos y agrégalos a tu carrito.',
+          helpStep2: 'Ve al carrito y revisa tus artículos.',
+          helpStep3: 'Procede al pago y confirma tu compra.',
+          helpStep4: 'Recibe la confirmación de tu pedido y rastrea tu envío.',
+          helpStep5: 'Después de recibirlo en su puerta, solicite el número OTP al repartidor.',
+          helpStep6: 'Si se verifica, acepte el pedido y realice el pago.',
+          noResults: 'No se encontraron productos.',
+        },
+        fr: {
+          heroTitle: 'Bienvenue chez MyShop',
+          heroDescription: 'Votre magasin unique pour des produits incroyables.',
+          featuredProductsTitle: 'Produits en Vedette',
+          cartTitle: 'Votre Panier',
+          checkoutTitle: 'Paiement',
+          helpTitle: 'Aide',
+          contactTitle: 'Contactez-nous',
+          contactDescription: 'Pour toute assistance, veuillez nous contacter:',
+          helpStep1: 'Parcourez les produits et ajoutez-les à votre panier.',
+          helpStep2: 'Allez dans le panier et vérifiez vos articles.',
+          helpStep3: 'Passez à la caisse et confirmez votre paiement.',
+          helpStep4: 'Recevez la confirmation de votre commande et suivez votre livraison.',
+          helpStep5: 'Après réception à votre porte, demandez le numéro OTP au livreur.',
+          helpStep6: 'S`il est vérifié, acceptez la commande et effectuez le paiement.',
+          noResults: 'Aucun produit trouvé.',
+        },
+        de: {
+          heroTitle: 'Willkommen bei MyShop',
+          heroDescription: 'Ihr One-Stop-Shop für tolle Produkte.',
+          featuredProductsTitle: 'Empfohlene Produkte',
+          cartTitle: 'Ihr Warenkorb',
+          checkoutTitle: 'Kasse',
+          helpTitle: 'Hilfe',
+          contactTitle: 'Kontaktieren Sie uns',
+          contactDescription: 'Für weitere Unterstützung kontaktieren Sie uns bitte:',
+          helpStep1: 'Durchsuchen Sie Produkte und fügen Sie sie Ihrem Warenkorb hinzu.',
+          helpStep2: 'Gehen Sie zum Warenkorb und überprüfen Sie Ihre Artikel.',
+          helpStep3: 'Gehen Sie zur Kasse und bestätigen Sie Ihre Zahlung.',
+          helpStep4: 'Erhalten Sie Ihre Bestellbestätigung und verfolgen Sie Ihre Lieferung.',
+          helpStep5: 'Nachdem Sie es an Ihrer Tür erhalten haben, bitten Sie den Lieferboten um die OTP-Nummer.',
+          helpStep6: 'Wenn es verifiziert ist, akzeptieren Sie die Bestellung und führen Sie die Zahlung durch.',
+          noResults: 'Keine Produkte gefunden.',
+        },
+        hi: {
+          heroTitle: 'माईशॉप में आपका स्वागत है',
+          heroDescription: 'अद्भुत उत्पादों के लिए आपकी एकमात्र दुकान।',
+          featuredProductsTitle: 'फीचर्ड उत्पाद',
+          cartTitle: 'आपकी गाड़ी',
+          checkoutTitle: 'चेकआउट',
+          helpTitle: 'मदद',
+          contactTitle: 'हमसे संपर्क करें',
+          contactDescription: 'आगे की सहायता के लिए, कृपया हमसे संपर्क करें:',
+          helpStep1: 'उत्पादों को ब्राउज़ करें और उन्हें अपनी गाड़ी में जोड़ें।',
+          helpStep2: 'गाड़ी पर जाएं और अपनी वस्तुओं की समीक्षा करें।',
+          helpStep3: 'चेकआउट पर जाएं और अपना भुगतान पुष्टि करें।',
+          helpStep4: 'अपनी ऑर्डर पुष्टि प्राप्त करें और अपनी शिपमेंट को ट्रैक करें।',
+          helpStep5: 'अपने दरवाजे पर प्राप्त करने के बाद, डिलीवरी वाले से OTP नंबर पूछें।',
+          helpStep6: 'यदि यह सत्यापित हो जाता है, तो ऑर्डर स्वीकार करें और भुगतान करें।',
+          noResults: 'कोई उत्पाद नहीं मिला।',
+        },
+        or: {
+          heroTitle: 'ମାଇସପ୍ କୁ ସ୍ୱାଗତ',
+          heroDescription: 'ଆପଣଙ୍କର ଏକମାତ୍ର ଦୋକାନ ଅଦ୍ଭୁତ ଉତ୍ପାଦ ପାଇଁ।',
+          featuredProductsTitle: 'ଫିଚର୍ଡ ଉତ୍ପାଦ',
+          cartTitle: 'ଆପଣଙ୍କର କାର୍ଟ',
+          checkoutTitle: 'ଚେକଆଉଟ୍',
+          helpTitle: 'ସହାୟତା',
+          contactTitle: 'ଆମ ସହିତ ଯୋଗାଯୋଗ କରନ୍ତୁ',
+          contactDescription: 'ଅଧିକ ସହାୟତା ପାଇଁ, ଦୟାକରି ଆମ ସହିତ ଯୋଗାଯୋଗ କରନ୍ତୁ:',
+          helpStep1: 'ଉତ୍ପାଦଗୁଡିକ ବ୍ରାଉଜ୍ କରନ୍ତୁ ଏବଂ ସେଗୁଡିକୁ ଆପଣଙ୍କ କାର୍ଟରେ ଯୋଡନ୍ତୁ।',
+          helpStep2: 'କାର୍ଟକୁ ଯାଆନ୍ତୁ ଏବଂ ଆପଣଙ୍କର ଆଇଟମ୍ ଗୁଡିକ ସମୀକ୍ଷା କରନ୍ତୁ।',
+          helpStep3: 'ଚେକଆଉଟ୍ କୁ ଯାଆନ୍ତୁ ଏବଂ ଆପଣଙ୍କର ଦେୟ ନିଶ୍ଚିତ କରନ୍ତୁ।',
+          helpStep4: 'ଆପଣଙ୍କର ଅର୍ଡର ନିଶ୍ଚିତକରଣ ପାଆନ୍ତୁ ଏବଂ ଆପଣଙ୍କର ଶିପମେଣ୍ଟ ଟ୍ରାକ୍ କରନ୍ତୁ।',
+          helpStep5: 'ଆପଣଙ୍କ ଦ୍ୱାରରେ ପହଞ୍ଚିବା ପରେ, ଡେଲିଭରି ବ୍ୟକ୍ତିଙ୍କଠାରୁ OTP ନମ୍ବର ପଚାରନ୍ତୁ।',
+          helpStep6: 'ଯଦି ଏହା ଯାଞ୍ଚ ହୋଇଛି, ତେବେ ଅର୍ଡର ଗ୍ରହଣ କରନ୍ତୁ ଏବଂ ଦେୟ କରନ୍ତୁ।',
+          noResults: 'କୌଣସି ଉତ୍ପାଦ ମିଳିଲା ନାହିଁ।',
+        },
+        bn: {
+          heroTitle: 'মাইশপে স্বাগতম',
+          heroDescription: 'আপনার একমাত্র দোকান আশ্চর্যজনক পণ্যের জন্য।',
+          featuredProductsTitle: 'ফিচার্ড পণ্য',
+          cartTitle: 'আপনার কার্ট',
+          checkoutTitle: 'চেকআউট',
+          helpTitle: 'সাহায্য',
+          contactTitle: 'আমাদের সাথে যোগাযোগ করুন',
+          contactDescription: 'আরও সাহায্যের জন্য, অনুগ্রহ করে আমাদের সাথে যোগাযোগ করুন:',
+          helpStep1: 'পণ্যগুলি ব্রাউজ করুন এবং সেগুলি আপনার কার্টে যোগ করুন।',
+          helpStep2: 'কার্টে যান এবং আপনার আইটেমগুলি পর্যালোচনা করুন।',
+          helpStep3: 'চেকআউটে যান এবং আপনার পেমেন্ট নিশ্চিত করুন।',
+          helpStep4: 'আপনার অর্ডার নিশ্চিতকরণ পান এবং আপনার শিপমেন্ট ট্র্যাক করুন।',
+          helpStep5: 'আপনার দরজায় পৌঁছানোর পরে, ডেলিভারি ব্যক্তির কাছ থেকে OTP নম্বর জিজ্ঞাসা করুন।',
+          helpStep6: 'যদি এটি যাচাই করা হয়, তাহলে অর্ডার গ্রহণ করুন এবং পেমেন্ট করুন।',
+          noResults: 'কোন পণ্য পাওয়া যায়নি।',
+        },
+        rj: {
+          heroTitle: 'माईशॉप में स्वागत है',
+          heroDescription: 'अद्भुत उत्पादों के लिए आपकी एकमात्र दुकान।',
+          featuredProductsTitle: 'फीचर्ड उत्पाद',
+          cartTitle: 'आपकी गाड़ी',
+          checkoutTitle: 'चेकआउट',
+          helpTitle: 'मदद',
+          contactTitle: 'हमसे संपर्क करें',
+          contactDescription: 'आगे की सहायता के लिए, कृपया हमसे संपर्क करें:',
+          helpStep1: 'उत्पादों को ब्राउज़ करें और उन्हें अपनी गाड़ी में जोड़ें।',
+          helpStep2: 'गाड़ी पर जाएं और अपनी वस्तुओं की समीक्षा करें।',
+          helpStep3: 'चेकआउट पर जाएं और अपना भुगतान पुष्टि करें।',
+          helpStep4: 'अपनी ऑर्डर पुष्टि प्राप्त करें और अपनी शिपमेंट को ट्रैक करें।',
+          helpStep5: 'आपके दरवाजे पर प्राप्त करने के बाद, डिलीवरी वाले से OTP नंबर पूछें।',
+          helpStep6: 'यदि यह सत्यापित हो जाता है, तो ऑर्डर स्वीकार करें और भुगतान करें।',
+          noResults: 'कोई उत्पाद नहीं मिला।',
+        },
+      };
+
+      // Set default language
+      let currentLanguage = 'en';
+      updateLanguage(currentLanguage);
+
+      // Render products
+      function renderProducts(filteredProducts = products) {
+        productList.innerHTML = '';
+        if (filteredProducts.length === 0) {
+          noResults.classList.remove('hidden');
+        } else {
+          noResults.classList.add('hidden');
+          filteredProducts.forEach(product => {
+            const productCard = document.createElement('div');
+            productCard.classList.add('product-card');
+            productCard.innerHTML = `
+              <img src="${product.image}" alt="${product.name}">
+              <h3>${product.name}</h3>
+              <p>${product.description}</p>
+              <p class="price">₹${product.price}</p>
+              <button onclick="addToCart(${product.id})">Add to Cart</button>
+            `;
+            productList.appendChild(productCard);
+          });
+        }
+      }
+
+      // Add to cart
+      window.addToCart = (productId) => {
+        const product = products.find(p => p.id === productId);
+        cart.push(product);
+        updateCart();
+      };
+
+      // Remove from cart
+      window.removeFromCart = (index) => {
+        cart.splice(index, 1); // Remove the item at the specified index
+        updateCart();
+      };
+
+      // Update cart
+      function updateCart() {
+        cartItems.innerHTML = '';
+        let total = 0;
+        cart.forEach((item, index) => {
+          const cartItem = document.createElement('div');
+          cartItem.classList.add('cart-item');
+          cartItem.innerHTML = `
+            <img src="${item.image}" alt="${item.name}">
+            <h3>${item.name}</h3>
+            <p class="price">₹${item.price}</p>
+            <button onclick="removeFromCart(${index})">Remove</button>
+          `;
+          cartItems.appendChild(cartItem);
+          total += item.price;
+        });
+        cartTotal.textContent = total;
+        checkoutTotal.textContent = total;
+        cartCount.textContent = cart.length;
+      }
+
+      // Search products
+      window.searchProducts = () => {
+        const query = searchInput.value.toLowerCase();
+        const filteredProducts = products.filter(product =>
+          product.name.toLowerCase().includes(query) ||
+          product.description.toLowerCase().includes(query)
+        );
+        renderProducts(filteredProducts);
+      };
+
+      // Change language
+      languageSelect.addEventListener('change', () => {
+        currentLanguage = languageSelect.value;
+        updateLanguage(currentLanguage);
+      });
+
+      // Update language
+      function updateLanguage(language) {
+        const translation = translations[language];
+        document.getElementById('hero-title').textContent = translation.heroTitle;
+        document.getElementById('hero-description').textContent = translation.heroDescription;
+        document.getElementById('featured-products-title').textContent = translation.featuredProductsTitle;
+        document.getElementById('cart-title').textContent = translation.cartTitle;
+        document.getElementById('checkout-title').textContent = translation.checkoutTitle;
+        document.getElementById('help-title').textContent = translation.helpTitle;
+        document.getElementById('contact-title').textContent = translation.contactTitle;
+        document.getElementById('contact-description').textContent = translation.contactDescription;
+        document.getElementById('help-step1').textContent = translation.helpStep1;
+        document.getElementById('help-step2').textContent = translation.helpStep2;
+        document.getElementById('help-step3').textContent = translation.helpStep3;
+        document.getElementById('help-step4').textContent = translation.helpStep4;
+        document.getElementById('help-step5').textContent = translation.helpStep5;
+        document.getElementById('help-step6').textContent = translation.helpStep6;
+        document.getElementById('no-results').textContent = translation.noResults;
+      }
+
+      // Navigation
+      homeLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        showPage('home-page');
+      });
+
+      productsLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        showPage('products-page');
+        renderProducts();
+      });
+
+      cartLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        showPage('cart-page');
+        updateCart();
+      });
+
+      helpLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        showPage('help-page');
+      });
+
+      contactLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        showPage('contact-page');
+      });
+
+      shopNowBtn.addEventListener('click', () => {
+        showPage('products-page');
+        renderProducts();
+      });
+
+      checkoutBtn.addEventListener('click', () => {
+        showPage('checkout-page');
+        checkoutItems.innerHTML = '';
+        cart.forEach(item => {
+          const li = document.createElement('li');
+          li.textContent = `${item.name} - ₹${item.price}`;
+          checkoutItems.appendChild(li);
+        });
+      });
+
+      confirmPaymentBtn.addEventListener('click', () => {
+        alert('Payment confirmed! Thank you for your purchase.');
+        cart.length = 0;
+        updateCart();
+        showPage('home-page');
+      });
+
+      // Show specific page and hide others
+      function showPage(pageId) {
+        const pages = ['home-page', 'products-page', 'cart-page', 'checkout-page', 'help-page', 'contact-page'];
+        pages.forEach(page => {
+          document.getElementById(page).classList.add('hidden');
+        });
+        document.getElementById(pageId).classList.remove('hidden');
+      }
+    });
+  </script>
+</body>
+</html>
