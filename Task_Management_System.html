@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Management System</title>
+  <style>
+    
+    body {
+      font-family: Arial, sans-serif;
+      background-color: lightblue;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: whitesmoke;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    .task-form {
+      display: flex;
+      margin-bottom: 20px;
+    }
+
+    .task-form input {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid white;
+      border-radius: 4px;
+      margin-right: 10px;
+    }
+
+    .task-form button {
+      padding: 10px 20px;
+      background-color: #218211;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .task-form button:hover {
+      background-color: #218838;
+    }
+
+    .task-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .task-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      border: 1px solid white;
+      border-radius: 4px;
+      margin-bottom: 10px;
+      background: whitesmoke;
+    }
+
+    .task-list li.completed {
+      text-decoration: line-through;
+      color: #888;
+    }
+
+    .task-list button {
+      background-color: #dc3545;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+
+    .task-list button:hover {
+      background-color: #c82333;
+    }
+
+    .task-stats {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .task-stats span {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Task Management System</h1>
+
+    <!-- Task Input Form -->
+    <div class="task-form">
+      <input type="text" id="task-input" placeholder="Add a new task">
+      <button onclick="addTask()">Add Task</button>
+    </div>
+
+    <!-- Task List -->
+    <ul class="task-list" id="task-list"></ul>
+
+    <!-- Task Statistics -->
+    <div class="task-stats">
+      <p>Total Tasks: <span id="total-tasks">0</span></p>
+      <p>Tasks Removed: <span id="tasks-removed">0</span></p>
+    </div>
+  </div>
+
+  <script>
+    
+    let totalTasks = 0; 
+    let tasksRemoved = 0; 
+
+    function addTask() {
+      const taskInput = document.getElementById('task-input');
+      const taskText = taskInput.value.trim();
+
+      if (taskText === '') {
+        alert('Please enter a task!');
+        return;
+      }
+
+      const taskList = document.getElementById('task-list');
+
+      const li = document.createElement('li');
+      li.innerHTML = `
+        <span>${taskText}</span>
+        <button onclick="deleteTask(this)">Delete</button>
+      `;
+
+        li.addEventListener('click', () => {
+        li.classList.toggle('completed');
+      });
+
+        taskList.appendChild(li);
+
+      totalTasks++;
+      updateStats();
+
+      taskInput.value = '';
+    }
+    function deleteTask(button) {
+      const li = button.parentElement;
+      li.remove();
+
+      tasksRemoved++;
+      updateStats();
+    }
+
+    function updateStats() {
+      document.getElementById('total-tasks').textContent = totalTasks;
+      document.getElementById('tasks-removed').textContent = tasksRemoved;
+    }
+  </script>
+</body>
+</html>
